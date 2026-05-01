@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum Category {
+  ACTORS
+  INFLUENCERS
+  CRICKETERS
+  CEOS
+  ATHLETES
+  MUSICIANS
+  SCIENTISTS
+  DOCTORS
+  ENTREPRENEURS
+  STUDENTS
+  SPIRITUAL_LEADERS
+  GENERAL_PUBLIC
+  OTHER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         Role     @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  category     Category
+  imageUrl     String   @default("")
+  statement    String
+  shortQuote   String
+  profession   String?
+  nationality  String?
+  socialUrl    String?
+  videoUrl     String?
+  isFeatured   Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@index([isFeatured])
+  @@index([isActive])
+}
+
+model ResearchPaper {
+  id               String   @id @default(cuid())
+  title            String
+  authors          String?
+  journal          String?
+  year             Int?
+  abstract         String?
+  url              String
+  researchCategory String?
+  isActive         Boolean  @default(true)
+  displayOrder     Int      @default(0)
+  createdAt        DateTime @default(now())
+}
+
+model GlobalStats {
+  id           String   @id @default(cuid())
+  key          String   @unique
+  label        String
+  value        String
+  numericValue Int      @default(0)
+  suffix       String   @default("")
+  icon         String?
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+model Course {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String
+  courseType       String
+  duration        String?
+  isOnline        Boolean  @default(false)
+  registrationUrl String?
+  imageEmoji      String   @default("🌅")
+  highlights      String[] @default([])
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
