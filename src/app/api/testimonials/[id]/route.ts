@@ -4,6 +4,24 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+// GET - single testimonial
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const testimonial = await prisma.testimonial.findUnique({
+      where: { id: params.id },
+    });
+    if (!testimonial) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    return NextResponse.json(testimonial);
+  } catch {
+    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+  }
+}
+
 // PUT - update testimonial
 export async function PUT(
   request: NextRequest,
@@ -54,4 +72,5 @@ export async function DELETE(
     return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
   }
 }
+
 

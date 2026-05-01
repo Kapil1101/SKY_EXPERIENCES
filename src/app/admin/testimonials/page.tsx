@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Trash2, Star, StarOff, Edit } from "lucide-react";
+import { Trash2, Star, StarOff, Edit, Pencil } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 interface Testimonial {
@@ -146,6 +146,13 @@ export default function ManageTestimonialsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-center gap-2">
+                        <Link
+                          href={`/admin/testimonials/${t.id}/edit`}
+                          className="rounded-full p-1.5 text-saffron hover:bg-saffron/10 transition-colors"
+                          title="Edit"
+                        >
+                          <Pencil size={16} />
+                        </Link>
                         <button
                           onClick={() => deleteTestimonial(t.id, t.name)}
                           className="rounded-full p-1.5 text-red-400 hover:bg-red-50 hover:text-red-600 transition-colors"
@@ -176,4 +183,6 @@ export default function ManageTestimonialsPage() {
     </div>
   );
 }
+
+
 
