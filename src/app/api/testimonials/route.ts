@@ -13,14 +13,14 @@ const testimonialSchema = z.object({
     "STUDENTS", "SPIRITUAL_LEADERS", "GENERAL_PUBLIC", "OTHER",
   ]),
   statement: z.string().min(10).max(5000),
-  shortQuote: z.string().max(280).optional(),
-  profession: z.string().max(100).optional(),
-  nationality: z.string().max(100).optional(),
-  socialUrl: z.string().url().optional().or(z.literal("")),
-  videoUrl: z.string().url().optional().or(z.literal("")),
-  imageUrl: z.string().optional(),
-  isFeatured: z.boolean().optional(),
-  displayOrder: z.number().optional(),
+  shortQuote: z.string().max(280).optional().default(""),
+  profession: z.string().max(100).optional().default(""),
+  nationality: z.string().max(100).optional().default(""),
+  socialUrl: z.string().optional().default(""),
+  videoUrl: z.string().optional().default(""),
+  imageUrl: z.string().optional().default(""),
+  isFeatured: z.boolean().optional().default(false),
+  displayOrder: z.number().optional().default(0),
 });
 
 function slugify(text: string): string {
@@ -112,4 +112,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 
