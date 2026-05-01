@@ -142,29 +142,31 @@ export default function TestimonialsPage() {
                   <div className="h-2 bg-gradient-to-r from-saffron to-warm-orange" />
 
                   <div className="p-6">
-                    {/* Avatar + Info */}
-                    <div className="flex items-center gap-4 mb-5">
+                    {/* Large centered photo */}
+                    <div className="flex flex-col items-center text-center mb-5">
                       {t.imageUrl ? (
-                        <img src={t.imageUrl} alt={t.name} className="h-14 w-14 rounded-full object-cover ring-2 ring-saffron/20 shrink-0" />
+                        <img
+                          src={t.imageUrl}
+                          alt={t.name}
+                          className="h-28 w-28 rounded-full object-cover ring-4 ring-saffron/20 shadow-lg mb-4"
+                        />
                       ) : (
-                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-xl shrink-0 ring-2 ring-saffron/20">
+                        <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-4xl ring-4 ring-saffron/20 shadow-lg mb-4">
                           {t.name.charAt(0)}
                         </div>
                       )}
-                      <div className="min-w-0">
-                        <h3 className="font-heading font-bold text-navy truncate">
-                          {t.name}
-                        </h3>
-                        {t.profession && (
-                          <p className="text-xs text-muted truncate">
-                            {t.profession}
-                          </p>
-                        )}
-                      </div>
+                      <h3 className="font-heading text-lg font-bold text-navy">
+                        {t.name}
+                      </h3>
+                      {t.profession && (
+                        <p className="text-sm text-muted mt-1">
+                          {t.profession}
+                        </p>
+                      )}
                     </div>
 
                     {/* Badges */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap justify-center gap-2 mb-4">
                       {cat && (
                         <span className="inline-block rounded-full bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron">
                           {cat.emoji} {cat.label}
@@ -178,11 +180,16 @@ export default function TestimonialsPage() {
                     </div>
 
                     {/* Quote */}
-                    <div className="relative">
-                      <span className="absolute -top-2 -left-1 text-4xl text-saffron/20 font-serif">&ldquo;</span>
-                      <p className="text-sm text-navy/80 leading-relaxed pl-4 italic">
+                    <div className="relative text-center">
+                      <span className="text-4xl text-saffron/20 font-serif">
+                        &ldquo;
+                      </span>
+                      <p className="text-sm text-navy/80 leading-relaxed italic px-2">
                         {t.shortQuote}
                       </p>
+                      <span className="text-4xl text-saffron/20 font-serif">
+                        &rdquo;
+                      </span>
                     </div>
                   </div>
                 </article>
@@ -194,6 +201,4 @@ export default function TestimonialsPage() {
     </div>
   );
 }
-
-
 

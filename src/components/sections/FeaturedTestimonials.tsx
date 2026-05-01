@@ -37,31 +37,34 @@ export default async function FeaturedTestimonials() {
             return (
               <article
                 key={t.id}
-                className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
+                className="group rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="flex items-center gap-3 mb-4">
+                <div className="h-2 bg-gradient-to-r from-saffron to-warm-orange" />
+                <div className="p-6 flex flex-col items-center text-center">
                   {t.imageUrl ? (
-                    <img src={t.imageUrl} alt={t.name} className="h-12 w-12 rounded-full object-cover" />
+                    <img
+                      src={t.imageUrl}
+                      alt={t.name}
+                      className="h-24 w-24 rounded-full object-cover ring-4 ring-saffron/20 shadow-lg mb-4"
+                    />
                   ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-lg">
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-3xl ring-4 ring-saffron/20 shadow-lg mb-4">
                       {t.name.charAt(0)}
                     </div>
                   )}
-                  <div>
-                    <h3 className="font-semibold text-navy text-sm">{t.name}</h3>
-                    {t.profession && (
-                      <p className="text-xs text-muted">{t.profession}</p>
-                    )}
-                  </div>
+                  <h3 className="font-heading font-bold text-navy">{t.name}</h3>
+                  {t.profession && (
+                    <p className="text-xs text-muted mt-1">{t.profession}</p>
+                  )}
+                  {cat && (
+                    <span className="inline-block rounded-full bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron mt-3 mb-3">
+                      {cat.emoji} {cat.label}
+                    </span>
+                  )}
+                  <p className="text-sm text-navy/70 leading-relaxed italic">
+                    &ldquo;{t.shortQuote}&rdquo;
+                  </p>
                 </div>
-                {cat && (
-                  <span className="inline-block rounded-full bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron mb-3">
-                    {cat.emoji} {cat.label}
-                  </span>
-                )}
-                <p className="text-sm text-navy/70 leading-relaxed italic">
-                  &ldquo;{t.shortQuote}&rdquo;
-                </p>
               </article>
             );
           })}
@@ -79,4 +82,3 @@ export default async function FeaturedTestimonials() {
     </section>
   );
 }
-
