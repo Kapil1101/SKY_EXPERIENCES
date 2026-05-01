@@ -130,46 +130,61 @@ export default function TestimonialsPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((t) => {
               const cat = getCategoryByKey(t.category);
               return (
                 <article
                   key={t.id}
-                  className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
+                  className="group relative rounded-2xl bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    {t.imageUrl ? (
-                      <img src={t.imageUrl} alt={t.name} className="h-12 w-12 rounded-full object-cover shrink-0" />
-                    ) : (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-lg shrink-0">
-                        {t.name.charAt(0)}
+                  {/* Top gradient bar */}
+                  <div className="h-2 bg-gradient-to-r from-saffron to-warm-orange" />
+
+                  <div className="p-6">
+                    {/* Avatar + Info */}
+                    <div className="flex items-center gap-4 mb-5">
+                      {t.imageUrl ? (
+                        <img src={t.imageUrl} alt={t.name} className="h-14 w-14 rounded-full object-cover ring-2 ring-saffron/20 shrink-0" />
+                      ) : (
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-xl shrink-0 ring-2 ring-saffron/20">
+                          {t.name.charAt(0)}
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <h3 className="font-heading font-bold text-navy truncate">
+                          {t.name}
+                        </h3>
+                        {t.profession && (
+                          <p className="text-xs text-muted truncate">
+                            {t.profession}
+                          </p>
+                        )}
                       </div>
-                    )}
-                    <div className="min-w-0">
-                      <h3 className="font-semibold text-navy text-sm truncate">
-                        {t.name}
-                      </h3>
-                      {t.profession && (
-                        <p className="text-xs text-muted truncate">
-                          {t.profession}
-                        </p>
+                    </div>
+
+                    {/* Badges */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {cat && (
+                        <span className="inline-block rounded-full bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron">
+                          {cat.emoji} {cat.label}
+                        </span>
+                      )}
+                      {t.nationality && (
+                        <span className="inline-block rounded-full bg-navy/5 px-3 py-1 text-xs text-navy/60">
+                          🌍 {t.nationality}
+                        </span>
                       )}
                     </div>
+
+                    {/* Quote */}
+                    <div className="relative">
+                      <span className="absolute -top-2 -left-1 text-4xl text-saffron/20 font-serif">&ldquo;</span>
+                      <p className="text-sm text-navy/80 leading-relaxed pl-4 italic">
+                        {t.shortQuote}
+                      </p>
+                    </div>
                   </div>
-                  {cat && (
-                    <span className="inline-block rounded-full bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron mb-3">
-                      {cat.emoji} {cat.label}
-                    </span>
-                  )}
-                  {t.nationality && (
-                    <span className="inline-block ml-2 rounded-full bg-navy/5 px-3 py-1 text-xs text-navy/60 mb-3">
-                      {t.nationality}
-                    </span>
-                  )}
-                  <p className="text-sm text-navy/70 leading-relaxed italic">
-                    &ldquo;{t.shortQuote}&rdquo;
-                  </p>
                 </article>
               );
             })}
@@ -179,5 +194,6 @@ export default function TestimonialsPage() {
     </div>
   );
 }
+
 
 

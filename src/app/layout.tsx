@@ -20,8 +20,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "SKY Experiences — Sudarshan Kriya Transformations",
-    template: "%s | SKY Experiences",
+    default: "Sudarshan Kriya Experiences — Transform Your Life",
+    template: "%s | Sudarshan Kriya Experiences",
   },
   description:
     "Discover transformative experiences of Sudarshan Kriya practitioners from around the world. Real stories of stress relief, mental clarity, and inner peace.",
@@ -72,6 +72,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 

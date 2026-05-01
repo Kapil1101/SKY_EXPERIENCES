@@ -5,11 +5,22 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import { Upload, User, FileText, MapPin, Share2, Star } from "lucide-react";
 
 const CATEGORIES = [
-  "ACTORS", "INFLUENCERS", "CRICKETERS", "CEOS", "ATHLETES",
-  "MUSICIANS", "SCIENTISTS", "DOCTORS", "ENTREPRENEURS",
-  "STUDENTS", "SPIRITUAL_LEADERS", "GENERAL_PUBLIC", "OTHER",
+  { value: "ACTORS", label: "🎬 Actors" },
+  { value: "INFLUENCERS", label: "📱 Influencers" },
+  { value: "CRICKETERS", label: "🏏 Cricketers" },
+  { value: "CEOS", label: "💼 CEOs" },
+  { value: "ATHLETES", label: "🏅 Athletes" },
+  { value: "MUSICIANS", label: "🎵 Musicians" },
+  { value: "SCIENTISTS", label: "🔬 Scientists" },
+  { value: "DOCTORS", label: "🩺 Doctors" },
+  { value: "ENTREPRENEURS", label: "🚀 Entrepreneurs" },
+  { value: "STUDENTS", label: "📚 Students" },
+  { value: "SPIRITUAL_LEADERS", label: "🙏 Spiritual Leaders" },
+  { value: "GENERAL_PUBLIC", label: "✨ General Public" },
+  { value: "OTHER", label: "📌 Other" },
 ];
 
 export default function AddTestimonialPage() {
@@ -65,7 +76,7 @@ export default function AddTestimonialPage() {
   return (
     <div className="pt-16 bg-cream min-h-screen">
       <Toaster position="top-right" />
-      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Link href="/admin/testimonials" className="text-sm text-saffron hover:underline">
             ← Back to Testimonials
@@ -73,170 +84,241 @@ export default function AddTestimonialPage() {
           <h1 className="mt-4 font-heading text-3xl font-bold text-navy">
             Add New Testimonial
           </h1>
+          <p className="mt-1 text-sm text-muted">Share a new Sudarshan Kriya experience</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-8 shadow-sm space-y-6">
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium text-navy mb-1">
-              Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              required
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-              placeholder="Person's full name"
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Person Info Card */}
+          <div className="rounded-2xl bg-white p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-6">
+              <User size={20} className="text-saffron" />
+              <h2 className="font-heading text-lg font-bold text-navy">Person Details</h2>
+            </div>
 
-          {/* Category */}
-          <div>
-            <label className="block text-sm font-medium text-navy mb-1">
-              Category <span className="text-red-500">*</span>
-            </label>
-            <select
-              required
-              value={form.category}
-              onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-            >
-              {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat.replace(/_/g, " ")}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Statement */}
-          <div>
-            <label className="block text-sm font-medium text-navy mb-1">
-              Photo URL <span className="text-muted">(paste image link)</span>
-            </label>
-            <input
-              type="url"
-              value={form.imageUrl}
-              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-              placeholder="https://example.com/photo.jpg"
-            />
-            {form.imageUrl && (
-              <div className="mt-2">
-                <img src={form.imageUrl} alt="Preview" className="h-20 w-20 rounded-full object-cover border-2 border-saffron/20" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+            {/* Photo URL + Preview */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-navy mb-1">
+                Photo URL
+              </label>
+              <div className="flex gap-4 items-start">
+                <div className="flex-1">
+                  <input
+                    type="url"
+                    value={form.imageUrl}
+                    onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+                    className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                    placeholder="https://example.com/photo.jpg"
+                  />
+                  <p className="mt-1 text-xs text-muted">
+                    Upload photo to{" "}
+                    <a href="https://postimages.org" target="_blank" rel="noopener noreferrer" className="text-saffron underline">
+                      postimages.org
+                    </a>{" "}
+                    or{" "}
+                    <a href="https://imgur.com" target="_blank" rel="noopener noreferrer" className="text-saffron underline">
+                      imgur.com
+                    </a>{" "}
+                    (free) → paste the direct link. Leave empty for avatar.
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  {form.imageUrl ? (
+                    <img
+                      src={form.imageUrl}
+                      alt="Preview"
+                      className="h-16 w-16 rounded-full object-cover border-2 border-saffron/30"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "";
+                        (e.target as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                  ) : (
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-saffron to-warm-orange flex items-center justify-center text-white text-xl font-bold">
+                      {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-            <p className="mt-1 text-xs text-muted">
-              Tip: Upload photo to <a href="https://postimages.org" target="_blank" rel="noopener noreferrer" className="text-saffron underline">postimages.org</a> (free) and paste the direct link here. Or leave empty for initial avatar.
-            </p>
-          </div>
+            </div>
 
-          {/* Full Statement */}
-          <div>
-            <label className="block text-sm font-medium text-navy mb-1">
-              Full Statement <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              required
-              rows={5}
-              value={form.statement}
-              onChange={(e) => setForm({ ...form, statement: e.target.value })}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-              placeholder="Their full testimonial about Sudarshan Kriya..."
-            />
-          </div>
-
-          {/* Short Quote */}
-          <div>
-            <label className="block text-sm font-medium text-navy mb-1">
-              Short Quote <span className="text-muted">(for card display, max 280 chars)</span>
-            </label>
-            <input
-              type="text"
-              maxLength={280}
-              value={form.shortQuote}
-              onChange={(e) => setForm({ ...form, shortQuote: e.target.value })}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-              placeholder="Leave empty to auto-generate from statement"
-            />
-          </div>
-
-          {/* Profession & Nationality */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-navy mb-1">Profession</label>
+            {/* Name */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-navy mb-1">
+                Full Name <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
-                value={form.profession}
-                onChange={(e) => setForm({ ...form, profession: e.target.value })}
+                required
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-                placeholder="e.g. Software Engineer"
+                placeholder="e.g. Virat Kohli"
               />
             </div>
+
+            {/* Category + Profession + Nationality */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-navy mb-1">
+                  Category <span className="text-red-500">*</span>
+                </label>
+                <select
+                  required
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                >
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat.value} value={cat.value}>
+                      {cat.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-navy mb-1">Profession</label>
+                <input
+                  type="text"
+                  value={form.profession}
+                  onChange={(e) => setForm({ ...form, profession: e.target.value })}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                  placeholder="e.g. Cricketer"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-navy mb-1">Nationality</label>
+                <input
+                  type="text"
+                  value={form.nationality}
+                  onChange={(e) => setForm({ ...form, nationality: e.target.value })}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                  placeholder="e.g. India"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonial Content Card */}
+          <div className="rounded-2xl bg-white p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-6">
+              <FileText size={20} className="text-saffron" />
+              <h2 className="font-heading text-lg font-bold text-navy">Their Experience</h2>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-navy mb-1">
+                Full Testimonial <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                required
+                rows={6}
+                value={form.statement}
+                onChange={(e) => setForm({ ...form, statement: e.target.value })}
+                className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                placeholder="Write their full experience with Sudarshan Kriya here..."
+              />
+              <p className="mt-1 text-xs text-muted">{form.statement.length} characters</p>
+            </div>
+
             <div>
-              <label className="block text-sm font-medium text-navy mb-1">Nationality</label>
+              <label className="block text-sm font-medium text-navy mb-1">
+                Short Quote <span className="text-muted text-xs">(shown on cards, max 280 chars)</span>
+              </label>
               <input
                 type="text"
-                value={form.nationality}
-                onChange={(e) => setForm({ ...form, nationality: e.target.value })}
+                maxLength={280}
+                value={form.shortQuote}
+                onChange={(e) => setForm({ ...form, shortQuote: e.target.value })}
                 className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-                placeholder="e.g. India"
+                placeholder="Leave empty to auto-generate from testimonial"
               />
             </div>
           </div>
 
-          {/* Social & Video URLs */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-navy mb-1">Social URL</label>
+          {/* Links Card */}
+          <div className="rounded-2xl bg-white p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-6">
+              <Share2 size={20} className="text-saffron" />
+              <h2 className="font-heading text-lg font-bold text-navy">Links (Optional)</h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-navy mb-1">Social Media URL</label>
+                <input
+                  type="url"
+                  value={form.socialUrl}
+                  onChange={(e) => setForm({ ...form, socialUrl: e.target.value })}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                  placeholder="https://instagram.com/..."
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-navy mb-1">Video URL</label>
+                <input
+                  type="url"
+                  value={form.videoUrl}
+                  onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+                  placeholder="https://youtube.com/..."
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Settings & Submit */}
+          <div className="rounded-2xl bg-white p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-6">
+              <Star size={20} className="text-saffron" />
+              <h2 className="font-heading text-lg font-bold text-navy">Display Settings</h2>
+            </div>
+
+            <div className="flex items-center gap-3 mb-6">
               <input
-                type="url"
-                value={form.socialUrl}
-                onChange={(e) => setForm({ ...form, socialUrl: e.target.value })}
-                className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-                placeholder="https://instagram.com/..."
+                type="checkbox"
+                id="featured"
+                checked={form.isFeatured}
+                onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })}
+                className="h-5 w-5 rounded border-gray-300 text-saffron focus:ring-saffron"
               />
+              <label htmlFor="featured" className="text-sm text-navy">
+                ⭐ Feature this testimonial on the homepage
+              </label>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-navy mb-1">Video URL</label>
-              <input
-                type="url"
-                value={form.videoUrl}
-                onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
-                className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-                placeholder="https://youtube.com/..."
-              />
+
+            {/* Live Preview */}
+            <div className="mb-6 rounded-xl bg-cream p-4">
+              <p className="text-xs font-medium text-muted mb-3 uppercase tracking-wide">Live Preview</p>
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  {form.imageUrl ? (
+                    <img src={form.imageUrl} alt="" className="h-10 w-10 rounded-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                  ) : (
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-saffron to-warm-orange flex items-center justify-center text-white font-bold text-sm">
+                      {form.name ? form.name.charAt(0).toUpperCase() : "?"}
+                    </div>
+                  )}
+                  <div>
+                    <p className="font-semibold text-navy text-sm">{form.name || "Person Name"}</p>
+                    <p className="text-xs text-muted">{form.profession || "Profession"}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-navy/70 italic">
+                  &ldquo;{form.shortQuote || form.statement?.slice(0, 120) || "Their quote will appear here..."}&rdquo;
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Featured */}
-          <div className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              id="featured"
-              checked={form.isFeatured}
-              onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })}
-              className="h-4 w-4 rounded border-gray-300 text-saffron focus:ring-saffron"
-            />
-            <label htmlFor="featured" className="text-sm text-navy">
-              Feature on homepage
-            </label>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-gradient-to-r from-saffron to-warm-orange py-4 font-bold text-white text-lg transition-all hover:shadow-lg hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "✨ Adding Testimonial..." : "✨ Add Testimonial"}
+            </button>
           </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-lg bg-saffron py-3 font-semibold text-white transition-all hover:bg-warm-orange disabled:opacity-50"
-          >
-            {loading ? "Adding..." : "Add Testimonial"}
-          </button>
         </form>
       </div>
     </div>
   );
 }
-
-
-

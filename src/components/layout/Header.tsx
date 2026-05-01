@@ -25,7 +25,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🙏</span>
             <span className="font-heading text-xl font-bold text-navy">
-              SKY <span className="text-saffron">Experiences</span>
+              Sudarshan <span className="text-saffron">Kriya</span>
             </span>
           </Link>
 
@@ -71,4 +71,5 @@ export default function Header() {
     </header>
   );
 }
+
 

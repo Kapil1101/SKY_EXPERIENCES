@@ -24,7 +24,7 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">🙏</span>
               <span className="font-heading text-xl font-bold">
-                SKY <span className="text-saffron">Experiences</span>
+                Sudarshan <span className="text-saffron">Kriya</span>
               </span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
@@ -124,4 +124,5 @@ export default function Footer() {
     </footer>
   );
 }
+
 
