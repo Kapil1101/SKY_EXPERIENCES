@@ -24,6 +24,7 @@ export default function AddTestimonialPage() {
     shortQuote: "",
     profession: "",
     nationality: "",
+    imageUrl: "",
     socialUrl: "",
     videoUrl: "",
     isFeatured: false,
@@ -110,6 +111,28 @@ export default function AddTestimonialPage() {
           </div>
 
           {/* Statement */}
+          <div>
+            <label className="block text-sm font-medium text-navy mb-1">
+              Photo URL <span className="text-muted">(paste image link)</span>
+            </label>
+            <input
+              type="url"
+              value={form.imageUrl}
+              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
+              placeholder="https://example.com/photo.jpg"
+            />
+            {form.imageUrl && (
+              <div className="mt-2">
+                <img src={form.imageUrl} alt="Preview" className="h-20 w-20 rounded-full object-cover border-2 border-saffron/20" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              </div>
+            )}
+            <p className="mt-1 text-xs text-muted">
+              Tip: Upload photo to <a href="https://postimages.org" target="_blank" rel="noopener noreferrer" className="text-saffron underline">postimages.org</a> (free) and paste the direct link here. Or leave empty for initial avatar.
+            </p>
+          </div>
+
+          {/* Full Statement */}
           <div>
             <label className="block text-sm font-medium text-navy mb-1">
               Full Statement <span className="text-red-500">*</span>
@@ -214,4 +237,6 @@ export default function AddTestimonialPage() {
     </div>
   );
 }
+
+
 

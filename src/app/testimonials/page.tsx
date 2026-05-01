@@ -13,6 +13,7 @@ interface Testimonial {
   statement: string;
   profession?: string;
   nationality?: string;
+  imageUrl?: string;
   isFeatured: boolean;
 }
 
@@ -138,9 +139,13 @@ export default function TestimonialsPage() {
                   className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-lg shrink-0">
-                      {t.name.charAt(0)}
-                    </div>
+                    {t.imageUrl ? (
+                      <img src={t.imageUrl} alt={t.name} className="h-12 w-12 rounded-full object-cover shrink-0" />
+                    ) : (
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-saffron to-warm-orange text-white font-bold text-lg shrink-0">
+                        {t.name.charAt(0)}
+                      </div>
+                    )}
                     <div className="min-w-0">
                       <h3 className="font-semibold text-navy text-sm truncate">
                         {t.name}
@@ -174,3 +179,5 @@ export default function TestimonialsPage() {
     </div>
   );
 }
+
+
