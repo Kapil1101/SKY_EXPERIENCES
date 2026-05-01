@@ -25,6 +25,9 @@ const config: Config = {
         "breathe": "breathe 6s ease-in-out infinite",
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",
         "marquee": "marquee 30s linear infinite",
+        "float": "float 6s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
+        "glow-pulse": "glowPulse 3s ease-in-out infinite",
       },
       keyframes: {
         breathe: {
@@ -39,6 +42,18 @@ const config: Config = {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        glowPulse: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(255, 107, 0, 0.2)" },
+          "50%": { boxShadow: "0 0 40px rgba(255, 107, 0, 0.4)" },
+        },
       },
     },
   },
@@ -46,4 +61,5 @@ const config: Config = {
 };
 
 export default config;
+
 
