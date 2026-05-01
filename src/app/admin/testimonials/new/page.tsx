@@ -103,11 +103,11 @@ export default function AddTestimonialPage() {
               <div className="flex gap-4 items-start">
                 <div className="flex-1">
                   <input
-                    type="url"
+                    type="text"
                     value={form.imageUrl}
                     onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                     className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-saffron focus:outline-none focus:ring-2 focus:ring-saffron/20"
-                    placeholder="https://example.com/photo.jpg"
+                    placeholder="https://i.postimg.cc/xxxxx/photo.jpg"
                   />
                   <p className="mt-1 text-xs text-muted">
                     Upload photo to{" "}
@@ -322,3 +322,4 @@ export default function AddTestimonialPage() {
     </div>
   );
 }
+
