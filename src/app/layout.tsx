@@ -34,17 +34,17 @@ export const metadata: Metadata = {
     "Sri Sri Ravi Shankar",
   ],
   openGraph: {
-    title: "SKY Experiences — Sudarshan Kriya Transformations",
+    title: "Sudarshan Kriya Experiences — Real Stories of Transformation",
     description:
-      "Discover how Sudarshan Kriya has transformed millions of lives across the world.",
+      "Discover how Sudarshan Kriya has transformed millions of lives across the world. Read real experiences and begin your journey.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SKY Experiences — Sudarshan Kriya Transformations",
+    title: "Sudarshan Kriya Experiences — Real Stories of Transformation",
     description:
-      "Discover how Sudarshan Kriya has transformed millions of lives across the world.",
+      "Discover how Sudarshan Kriya has transformed millions of lives across the world. Read real experiences.",
   },
 };
 
@@ -72,6 +72,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+
 
 
 

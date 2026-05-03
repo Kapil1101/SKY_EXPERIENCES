@@ -49,7 +49,7 @@ export default function TestimonialsPage() {
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="font-heading text-4xl font-bold text-navy sm:text-5xl">
-            Experiences That Inspire
+            Sudarshan Kriya Experiences
           </h1>
           <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
             Real stories from people whose lives transformed through Sudarshan

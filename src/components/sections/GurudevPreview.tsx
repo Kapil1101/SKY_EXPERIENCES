@@ -7,7 +7,14 @@ export default function GurudevPreview() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <div className="relative h-72 w-72 sm:h-80 sm:w-80 rounded-full bg-gradient-to-br from-saffron/20 to-warm-orange/20 flex items-center justify-center">
-              <span className="text-8xl">🙏</span>
+              <div className="text-center">
+                <p className="font-heading text-2xl font-bold text-navy/80">Gurudev</p>
+                <p className="font-heading text-lg text-navy/60">Sri Sri</p>
+                <p className="font-heading text-lg text-navy/60">Ravi Shankar</p>
+                <div className="mx-auto my-3 h-px w-16 bg-gradient-to-r from-transparent via-saffron to-transparent" />
+                <p className="text-xs text-navy/40 uppercase tracking-wider">Founder</p>
+                <p className="text-xs text-navy/40 uppercase tracking-wider">Art of Living</p>
+              </div>
               <div className="absolute inset-0 rounded-full border-2 border-dashed border-saffron/30 animate-spin" style={{ animationDuration: "30s" }} />
             </div>
           </div>

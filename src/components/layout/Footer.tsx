@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const quickLinks = [
   { href: "/", label: "Home" },
-  { href: "/testimonials", label: "Testimonials" },
+  { href: "/testimonials", label: "SK Experiences" },
   { href: "/research", label: "Research" },
   { href: "/benefits", label: "Benefits" },
   { href: "/courses", label: "Courses" },
@@ -21,10 +21,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">🙏</span>
+            <div className="flex items-center gap-1.5 mb-4">
               <span className="font-heading text-xl font-bold">
-                Sudarshan <span className="text-saffron">Kriya</span>
+                <span className="text-saffron">Sudarshan</span>{" "}
+                <span className="text-white">Kriya</span>
               </span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
@@ -99,7 +99,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.youtube.com/@ArtofLiving"
+                  href="https://www.youtube.com/artofliving"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-400 hover:text-saffron transition-colors"
@@ -116,7 +116,7 @@ export default function Footer() {
             Made with 🧡 for the Art of Living community
           </p>
           <p className="mt-2 text-xs text-gray-600">
-            © {new Date().getFullYear()} SKY Experiences. This is an
+            © {new Date().getFullYear()} Sudarshan Kriya Experiences. An
             independent community project.
           </p>
         </div>

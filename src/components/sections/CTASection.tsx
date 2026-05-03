@@ -12,7 +12,7 @@ export default function CTASection() {
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           {[
-            { icon: "📺", label: "YouTube", url: "https://www.youtube.com/@ArtofLiving" },
+            { icon: "📺", label: "YouTube", url: "https://www.youtube.com/artofliving" },
             { icon: "📸", label: "Instagram", url: "https://www.instagram.com/artofliving/" },
             { icon: "🐦", label: "Twitter", url: "https://twitter.com/ArtOfLiving" },
             { icon: "📘", label: "Facebook", url: "https://www.facebook.com/ArtOfLiving/" },
