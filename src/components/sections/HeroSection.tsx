@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -84,6 +84,12 @@ export default function HeroSection() {
             className="w-full rounded-full border-2 border-white/20 px-10 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all hover:border-saffron/50 hover:bg-white/5 sm:w-auto"
           >
             Learn Sudarshan Kriya
+          </Link>
+          <Link
+            href="/benefits"
+            className="w-full rounded-full border-2 border-gold/30 px-10 py-4 text-lg font-semibold text-gold backdrop-blur-sm transition-all hover:border-gold/60 hover:bg-gold/5 sm:w-auto"
+          >
+            Discover All Benefits
           </Link>
         </div>
       </div>
